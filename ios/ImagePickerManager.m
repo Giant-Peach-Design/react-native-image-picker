@@ -134,6 +134,10 @@ RCT_EXPORT_METHOD(showImagePicker:(NSDictionary *)options callback:(RCTResponseS
 {
     self.picker = [[UIImagePickerController alloc] init];
 
+    if (@available(iOS 11.0, *)) {
+        self.picker.videoExportPreset = AVAssetExportPresetPassthrough;
+    }
+    
     if (target == RNImagePickerTargetCamera) {
 #if TARGET_IPHONE_SIMULATOR
         self.callback(@[@{@"error": @"Camera not available on simulator"}]);
